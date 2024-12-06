@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { AutenticarUsuariosComponent } from './components/pages/autenticar-usuarios/autenticar-usuarios.component';
+import { AutenticarUsuarioComponent } from './components/pages/autenticar-usuario/autenticar-usuario.component';
 
 export const routes: Routes = [
     {
-        path: 'pages/autenticar-usuarios',
-        component: AutenticarUsuariosComponent
+        path: 'pages/autenticar-usuario',
+        component: AutenticarUsuarioComponent
     },
     {
         path: '', pathMatch: 'full',
-        redirectTo: '/pages/autenticar-usuarios'
+        redirectTo: '/pages/autenticar-usuario'
     }
 ];
