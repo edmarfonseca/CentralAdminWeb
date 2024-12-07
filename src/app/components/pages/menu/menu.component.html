@@ -1,0 +1,46 @@
+<style>
+    .hover-effect {
+        background-color: white;
+        /* Cor padrão (branco) */
+        transition: background-color 0.3s ease;
+        /* Animação suave */
+    }
+
+    /* Aplica o estilo no hover */
+    .hover-effect:hover {
+        background-color: #f8f9fa !important;
+        /* Força o estilo no hover */
+    }
+</style>
+
+<div class="container my-5">
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <a routerLink="#" class="text-decoration-none">
+                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
+                    <i class="bi bi-grid fs-2 text-primary me-3"></i>
+                    <div>
+                        <h6 class="mb-1 text-dark">Sistemas</h6>
+                        <p class="mb-0 text-muted">Incluir, alterar, excluir, além de mapear a URL base dos aplicativos.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a routerLink="#" class="text-decoration-none">
+                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
+                    <i class="bi bi-people fs-2 text-primary me-3"></i>
+                    <div>
+                        <h6 class="mb-1 text-dark">Clientes</h6>
+                        <p class="mb-0 text-muted">Gerenciamento dos clientes, que podem ter acesso a vários sistemas.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>

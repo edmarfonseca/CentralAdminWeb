@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-autenticar-usuario',
@@ -18,8 +19,11 @@ import { environment } from '../../../../environments/environment';
 })
 export class AutenticarUsuarioComponent {
 
+  mensagemErro: string = '';
+
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private spinner: NgxSpinnerService
   ) { }
 
   form = new FormGroup({
@@ -32,13 +36,18 @@ export class AutenticarUsuarioComponent {
   }
 
   onSubmit() {
+
+    this.spinner.show();
+
     this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value)
       .subscribe({
-        next: (data) => {
-          console.log(data);
+        next: (data: any) => {
+          sessionStorage.setItem('user-auth', JSON.stringify(data));
+          location.href = '/pages/menu';
         },
         error: (e) => {
-          console.log(e.error);
+          this.mensagemErro = e.error.message;
+          this.spinner.hide();
         }
       })
   }

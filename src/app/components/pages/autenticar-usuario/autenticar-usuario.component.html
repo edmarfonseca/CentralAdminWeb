@@ -1,6 +1,11 @@
 <div class="bg-light d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
 
+        <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Erro:</strong> {{ mensagemErro }}
+            <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="mb-3">
