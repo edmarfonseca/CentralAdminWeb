@@ -1,24 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-autenticar-usuario',
+  selector: 'app-cadastrar-sistemas',
   imports: [
-    RouterLink,
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  templateUrl: './autenticar-usuario.component.html',
-  styleUrl: './autenticar-usuario.component.css'
+  templateUrl: './cadastrar-sistemas.component.html',
+  styleUrl: './cadastrar-sistemas.component.css'
 })
-export class AutenticarUsuarioComponent {
+export class CadastrarSistemasComponent {
 
+  mensagemSucesso: string = '';
   mensagemErro: string = '';
 
   constructor(
@@ -27,8 +26,18 @@ export class AutenticarUsuarioComponent {
   ) { }
 
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)])
+
+    codigo: new FormControl('', [
+      Validators.required, Validators.maxLength(10)
+    ]),
+
+    nome: new FormControl('', [
+      Validators.required, Validators.maxLength(50)
+    ]),
+
+    url: new FormControl('', [
+      Validators.required, Validators.maxLength(250)
+    ])
   });
 
   get f() {
@@ -37,20 +46,23 @@ export class AutenticarUsuarioComponent {
 
   onSubmit() {
 
+    this.mensagemSucesso = '';
+    this.mensagemErro = '';
+
     this.spinner.show();
 
-    this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value)
+    this.httpClient.post(environment.sistemasApi, this.form.value)
       .subscribe({
         next: (data: any) => {
-          sessionStorage.setItem('user-auth', JSON.stringify(data));
-          location.href = '/pages/menu';
           this.spinner.hide();
+          this.mensagemSucesso = `Cadastro realizado com sucesso!`;          
         },
         error: (e) => {
           this.mensagemErro = e.error.message;
           this.spinner.hide();
         }
-      })
+      });
+
   }
 
 }

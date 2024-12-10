@@ -1,0 +1,34 @@
+<h4>Sistemas</h4>
+<p>Lista de aplicativos</p>
+<hr />
+
+<div class="table-responsive">
+    <button type="button" class="btn btn-outline-primary btn-sm mt-3 mb-3" [routerLink]='["/pages/cadastrar-sistemas"]'>Cadastrar Sistema</button>
+
+    <table class="table table-sm table-striped table-hover text-center mx-auto">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>URL</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of sistemas">
+                <td>{{ s.codigo }}</td>
+                <td>{{ s.nome }}</td>
+                <td>{{ s.url }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary me-2" title="Editar" [routerLink]="['/pages/editar-sistemas', s.id]">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-outline-danger" title="Excluir" (click)="onDelete(s.id, s.nome)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
