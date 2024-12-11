@@ -4,8 +4,13 @@ import { MenuComponent } from './components/pages/menu/menu.component';
 import { ConsultarSistemasComponent } from './components/pages/consultar-sistemas/consultar-sistemas.component';
 import { CadastrarSistemasComponent } from './components/pages/cadastrar-sistemas/cadastrar-sistemas.component';
 import { EditarSistemasComponent } from './components/pages/editar-sistemas/editar-sistemas.component';
+import { ConsultarClientesComponent } from './components/pages/consultar-clientes/consultar-clientes.component';
 
 export const routes: Routes = [
+    {
+        path: 'pages/consultar-clientes',
+        component: ConsultarClientesComponent
+    },
     {
         path: 'pages/editar-sistemas/:id',
         component: EditarSistemasComponent
