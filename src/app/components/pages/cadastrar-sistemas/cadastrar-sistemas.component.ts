@@ -53,9 +53,10 @@ export class CadastrarSistemasComponent {
 
     this.httpClient.post(environment.sistemasApi, this.form.value)
       .subscribe({
-        next: (data: any) => {
+        next: (data: any) => {          
+          this.mensagemSucesso = `Cadastro realizado com sucesso!`;
+          this.form.reset();
           this.spinner.hide();
-          this.mensagemSucesso = `Cadastro realizado com sucesso!`;          
         },
         error: (e) => {
           this.mensagemErro = e.error.message;

@@ -2,10 +2,29 @@
 <p>Lista de clientes dos sistemas</p>
 <hr />
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Exclusão de Cliente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir o cliente?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="table-responsive">
 
     <div class="mt-3">
-        <button type="button" class="btn btn-outline-primary" [routerLink]="['/pages/cadastrar-clientes']">Cadastrar Clientes</button>
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['/pages/cadastrar-clientes']">Cadastrar
+            Cliente</button>
 
         <div class="text-end">
             <pagination-controls previousLabel="" nextLabel=""
@@ -13,10 +32,10 @@
         </div>
     </div>
 
-    <table class="table table-sm table-striped table-hover text-center mx-auto">
+    <table class="table table-sm table-striped table-hover align-middle">
         <thead>
             <tr>
-                <th>CPF/CNPJ</th>
+                <th>CPF / CNPJ</th>
                 <th>Nome</th>
                 <th></th>
             </tr>
@@ -25,13 +44,16 @@
             <tr *ngFor="let c of clientes | paginate : { itemsPerPage: 10, currentPage: pagina }">
                 <td>{{ formatarCpfCnpj(c.cpfCnpj) }}</td>
                 <td>{{ c.nome }}</td>
-                <td>
+                <td class="text-end">
                     <button class="btn btn-sm btn-outline-primary me-2" title="Editar"
                         [routerLink]="['/pages/editar-clientes', c.id]">
                         <i class="bi bi-pencil"></i>
                     </button>
 
+                    <button type="button" class="btn btn-sm btn-outline-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <!--
                     <button class="btn btn-sm btn-outline-danger" title="Excluir" (click)="onDelete(c.id, c.nome)">
+                    -->
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>

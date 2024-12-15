@@ -1,0 +1,134 @@
+<h4>Cadastro de Clientes</h4>
+<p>Preencha o formulário abaixo para incluir um cliente</p>
+<hr />
+
+<div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Sucesso!</strong> {{ mensagemSucesso }}
+    <button (click)="mensagemSucesso = ''" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Erro: </strong> {{ mensagemErro }}
+    <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row mt-4 mb-3">
+        <div class="btn-group col-md-3" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [checked]="isPF"
+                (change)="onSelecaoPessoa(true)">
+            <label class="btn btn-outline-primary" for="btnradio1">Pessoa Física</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [checked]="!isPF"
+                (change)="onSelecaoPessoa(false)">
+            <label class="btn btn-outline-primary" for="btnradio2">Pessoa Jurídica</label>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div *ngIf="isPF" class="col-md-3 mb-3">
+            <label>CPF</label>
+            <input type=" text" mask="000.000.000-00" class="form-control" formControlName="cpf"
+                placeholder="Digite o CPF aqui" />
+            <div class="text-danger" *ngIf="f['cpf'].touched && f['cpf'].invalid">
+                Informe o CPF corretamente.
+            </div>
+        </div>
+
+        <div *ngIf="!isPF" class="col-md-3 mb-3">
+            <label>CNPJ</label>
+            <input type=" text" mask="00.000.000/0000-00" class="form-control" formControlName="cnpj"
+                placeholder="Digite o CNPJ aqui" />
+            <div class="text-danger" *ngIf="f['cnpj'].touched && f['cnpj'].invalid">
+                Informe o CNPJ corretamente.
+            </div>
+        </div>
+
+        <div class="col-md-9 mb-3">
+            <label>Nome</label>
+            <input type="text" class="form-control" formControlName="nome" placeholder="Digite o nome aqui" />
+            <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+                Informe o nome com até 100 caracteres.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9 mb-3">
+            <label>Logradouro</label>
+            <input type=" text" class="form-control" formControlName="logradouro"
+                placeholder="Digite o logradouro aqui" />
+            <div class="text-danger" *ngIf="f['logradouro'].touched && f['logradouro'].invalid">
+                Informe o logradouro com até 100 caracteres.
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label>Número</label>
+            <input type=" text" mask="99999" class="form-control" formControlName="numero"
+                placeholder="Digite o número aqui" />
+            <div class="text-danger" *ngIf="f['numero'].touched && f['numero'].invalid">
+                Informe o número.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label>Complemento</label>
+            <input type="text" class="form-control" formControlName="complemento"
+                placeholder="Digite o complemento aqui" />
+            <div class="text-danger" *ngIf="f['complemento'].touched && f['complemento'].invalid">
+                Informe o complemento com até 50 caracteres.
+            </div>
+        </div>
+
+        <div class="col-md-7 mb-3">
+            <label>Bairro</label>
+            <input type=" text" class="form-control" formControlName="bairro" placeholder="Digite o bairro aqui" />
+            <div class="text-danger" *ngIf="f['bairro'].touched && f['bairro'].invalid">
+                Informe o bairro com até 50 caracteres.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Cidade</label>
+            <input type="text" class="form-control" formControlName="cidade" placeholder="Digite a cidade aqui" />
+            <div class="text-danger" *ngIf="f['cidade'].touched && f['cidade'].invalid">
+                Informe a cidade com até 50 caracteres.
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label>UF</label>
+            <select formControlName="uf" class="form-select">
+                <option value="" disabled selected>Selecione a UF aqui</option>
+                <option *ngFor="let u of ufs" [value]="u.sigla">{{ u.descricao }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <label>Cep</label>
+            <div class="input-group">
+                <input type=" text" mask="00000-000" class="form-control" formControlName="cep" placeholder="Digite o cep aqui" />
+                <a class="text-decoration-none" (click)="onConsultaCep(f['cep'].value)">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="text-danger" *ngIf="f['cep'].touched && f['cep'].invalid">
+                Informe o cep corretamente.
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Realizar Cadastro" [disabled]="form.invalid" />
+        </div>
+    </div>
+</form>
