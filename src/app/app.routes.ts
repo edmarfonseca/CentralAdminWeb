@@ -7,6 +7,7 @@ import { EditarSistemasComponent } from './components/pages/editar-sistemas/edit
 import { ConsultarClientesComponent } from './components/pages/consultar-clientes/consultar-clientes.component';
 import { EditarClientesComponent } from './components/pages/editar-clientes/editar-clientes.component';
 import { CadastrarClientesComponent } from './components/pages/cadastrar-clientes/cadastrar-clientes.component';
+import { DeleteModalComponent } from './components/shared/delete-modal/delete-modal.component';
 
 export const routes: Routes = [
     {

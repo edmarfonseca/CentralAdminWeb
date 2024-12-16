@@ -5,6 +5,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-modal.component';
 
 @Component({
   selector: 'app-cadastrar-clientes',
@@ -12,7 +13,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MensagemModalComponent
   ],
   providers: [
     provideNgxMask()
@@ -23,6 +25,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class CadastrarClientesComponent {
 
   mensagemSucesso: string = '';
+  mensagemAtencao: string = '';
   mensagemErro: string = '';
   isPF: boolean = true;
   ufs: any[] = [];
@@ -108,6 +111,7 @@ export class CadastrarClientesComponent {
   onSubmit() {
 
     this.mensagemSucesso = '';
+    this.mensagemAtencao = '';
     this.mensagemErro = '';
 
     this.spinner.show();
@@ -115,7 +119,7 @@ export class CadastrarClientesComponent {
     if (this.isPF) {
       this.f.cpfCnpj.setValue(this.f.cpf.value);
     }
-    else{
+    else {
       this.f.cpfCnpj.setValue(this.f.cnpj.value);
     }
 
@@ -141,7 +145,7 @@ export class CadastrarClientesComponent {
       this.f.cpf.setValue('');
       this.f.cnpj.setValue('00000000000000');
     }
-    else{
+    else {
       this.f.cpf.setValue('00000000000');
       this.f.cnpj.setValue('');
     }
@@ -150,7 +154,7 @@ export class CadastrarClientesComponent {
   onConsultaCep(eCep: string | null | undefined): void {
 
     if (!eCep || eCep.length < 8) {
-      this.mensagemErro = 'Informe o CEP corretamente antes de realizar a consulta.';
+      this.mensagemAtencao = `Informe o CEP corretamente antes de realizar a consulta.`;
       return;
     }
 
@@ -170,7 +174,7 @@ export class CadastrarClientesComponent {
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemErro = 'Consulta ao CEP falhou!';
+          this.mensagemErro = `Consulta ao CEP falhou!`;
           this.spinner.hide();
         }
       });

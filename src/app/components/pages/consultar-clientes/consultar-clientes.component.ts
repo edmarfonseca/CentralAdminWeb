@@ -5,13 +5,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DeleteModalComponent } from '../../shared/delete-modal/delete-modal.component';
+import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-modal.component';
 
 @Component({
   selector: 'app-consultar-clientes',
   imports: [
     CommonModule,
     RouterLink,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DeleteModalComponent,
+    MensagemModalComponent
   ],
   templateUrl: './consultar-clientes.component.html',
   styleUrl: './consultar-clientes.component.css'
@@ -20,6 +24,10 @@ export class ConsultarClientesComponent {
 
   clientes: any[] = [];
   pagina: number = 1;
+  selectedId: string = '';
+  messageDelete: string = '';
+  mensagemSucesso: string = '';
+  mensagemErro: string = '';
 
   constructor(
     private httpClient: HttpClient,
@@ -39,20 +47,40 @@ export class ConsultarClientesComponent {
       });
   }
 
-  onDelete(id: string, nome: string) {
+  setParamDelete(id: string, cpfCnpj: string, nome: string) {
 
-    if (confirm(`Deseja realmente excluir o cliente ${nome}?`)) {
+    this.selectedId = id;
 
-      this.spinner.show();
-
-      this.httpClient.delete(`${environment.clientesApi}/${id}`)
-        .subscribe({
-          next: (data: any) => {
-            this.spinner.hide();
-            this.ngOnInit();
-          }
-        })
+    if (cpfCnpj.length === 11) {
+      this.messageDelete = 'CPF: '
     }
+    else if (cpfCnpj.length === 14) {
+      this.messageDelete = 'CNPJ: '
+    }
+
+    this.messageDelete = this.messageDelete + this.formatarCpfCnpj(cpfCnpj);
+    this.messageDelete = this.messageDelete + '<br>' + nome;
+  }
+
+  onDelete() {
+
+    this.mensagemSucesso = '';
+    this.mensagemErro = '';
+
+    this.spinner.show();
+
+    this.httpClient.delete(`${environment.clientesApi}/${this.selectedId}`)
+      .subscribe({
+        next: (data: any) => {
+          this.mensagemSucesso = `Exclusão realizada com sucesso!`;
+          this.spinner.hide();
+          this.ngOnInit();
+        },
+        error: (e) => {
+          this.mensagemErro = e.error.message;
+          this.spinner.hide();
+        }
+      })
   }
 
   handlePageChange(event: any) {

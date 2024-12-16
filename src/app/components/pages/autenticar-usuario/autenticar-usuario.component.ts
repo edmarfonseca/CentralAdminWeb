@@ -2,14 +2,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-autenticar-usuario',
   imports: [
-    RouterLink,
     CommonModule,
     FormsModule,
     ReactiveFormsModule
