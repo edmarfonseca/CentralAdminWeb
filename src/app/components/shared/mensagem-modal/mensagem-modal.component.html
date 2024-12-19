@@ -4,7 +4,7 @@
         <div class="toast-body">
             {{ success }}
         </div>
-        <button (click)="success = ''" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
+        <button (click)="exibirMensagem('', 'success')" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
         </button>
     </div>
 </div>
@@ -15,7 +15,7 @@
         <div class="toast-body">
             {{ warning }}
         </div>
-        <button (click)="warning = ''" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
+        <button (click)="exibirMensagem('', 'warning')" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
         </button>
     </div>
 </div>
@@ -26,7 +26,7 @@
         <div class="toast-body">
             {{ error }}
         </div>
-        <button (click)="error = ''" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
+        <button (click)="exibirMensagem('', 'error')" type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close">
         </button>
     </div>
 </div>

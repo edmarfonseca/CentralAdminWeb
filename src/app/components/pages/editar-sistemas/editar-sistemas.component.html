@@ -16,7 +16,7 @@
 
     <div class="col-md-3 mt-4 mb-3">
         <label>Código</label>
-        <input type="text" class="form-control" formControlName="codigo" placeholder="Digite o código aqui" />
+        <input type="text" maxlength="10" class="form-control" formControlName="codigo" placeholder="Digite o código aqui" />
         <div class="text-danger" *ngIf="f['codigo'].touched && f['codigo'].invalid">
             Informe o código do sistema com até 10 caracteres.
         </div>
@@ -24,7 +24,7 @@
 
     <div class="col-md-6 mb-3">
         <label>Nome</label>
-        <input type="text" class="form-control" formControlName="nome" placeholder="Digite o nome aqui" />
+        <input type="text" maxlength="50" class="form-control" formControlName="nome" placeholder="Digite o nome aqui" />
         <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
             Informe o nome do sistema com até 50 caracteres.
         </div>
@@ -32,7 +32,7 @@
 
     <div class="col-md-12 mb-4">
         <label>URL</label>
-        <input type="text" class="form-control" formControlName="url" placeholder="Digite a URL aqui" />
+        <input type="text" maxlength="250" class="form-control" formControlName="url" placeholder="Digite a URL aqui" />
         <div class="text-danger" *ngIf="f['url'].touched && f['url'].invalid">
             Informe a URL do sistema com até 250 caracteres.
         </div>

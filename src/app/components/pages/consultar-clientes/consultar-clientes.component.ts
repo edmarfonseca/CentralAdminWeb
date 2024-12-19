@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { environment } from '../../../../environments/environment';
@@ -22,12 +22,12 @@ import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-mod
 })
 export class ConsultarClientesComponent {
 
+  @ViewChild(MensagemModalComponent) mensagemModal!: MensagemModalComponent;
+
   clientes: any[] = [];
   pagina: number = 1;
   selectedId: string = '';
   messageDelete: string = '';
-  mensagemSucesso: string = '';
-  mensagemErro: string = '';
 
   constructor(
     private httpClient: HttpClient,
@@ -64,20 +64,17 @@ export class ConsultarClientesComponent {
 
   onDelete() {
 
-    this.mensagemSucesso = '';
-    this.mensagemErro = '';
-
     this.spinner.show();
 
     this.httpClient.delete(`${environment.clientesApi}/${this.selectedId}`)
       .subscribe({
         next: (data: any) => {
-          this.mensagemSucesso = `Exclusão realizada com sucesso!`;
+          this.mensagemModal.exibirMensagem('Exclusão realizada com sucesso!', 'success');
           this.spinner.hide();
           this.ngOnInit();
         },
         error: (e) => {
-          this.mensagemErro = e.error.message;
+          this.mensagemModal.exibirMensagem(e.error.message, 'error');
           this.spinner.hide();
         }
       })

@@ -1,5 +1,4 @@
-<app-mensagem-modal [success]="mensagemSucesso" [warning]="mensagemAtencao" [error]="mensagemErro">
-</app-mensagem-modal>
+<app-mensagem-modal></app-mensagem-modal>
 
 <h4>Cadastro de Clientes</h4>
 <p>Preencha o formulário para incluir um cliente</p>
@@ -51,7 +50,7 @@
         <div class="col-md-9 mb-3">
             <div class="input-group has-validation">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="nome" formControlName="nome"
+                    <input type="text" maxlength="100" class="form-control" id="nome" formControlName="nome"
                         placeholder="Digite o nome aqui"
                         [ngClass]="{'is-invalid': f['nome'].touched && f['nome'].invalid}" />
                     <label for="nome">Nome</label>
@@ -67,7 +66,7 @@
         <div class="col-md-9 mb-3">
             <div class="input-group has-validation">
                 <div class="form-floating">
-                    <input type=" text" class="form-control" id="logradouro" formControlName="logradouro"
+                    <input type=" text" maxlength="100" class="form-control" id="logradouro" formControlName="logradouro"
                         placeholder="Digite o logradouro aqui"
                         [ngClass]="{'is-invalid': f['logradouro'].touched && f['logradouro'].invalid}" />
                     <label for="logradouro">Logradouro</label>
@@ -97,7 +96,7 @@
         <div class="col-md-5 mb-3">
             <div class="input-group has-validation">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="complemento" formControlName="complemento"
+                    <input type="text" maxlength="50" class="form-control" id="complemento" formControlName="complemento"
                         placeholder="Digite o complemento aqui"
                         [ngClass]="{'is-invalid': f['complemento'].touched && f['complemento'].invalid}" />
                     <label for="complemento">Complemento</label>
@@ -111,7 +110,7 @@
         <div class="col-md-7 mb-3">
             <div class="input-group has-validation">
                 <div class="form-floating">
-                    <input type=" text" class="form-control" id="bairro" formControlName="bairro"
+                    <input type=" text" maxlength="50" class="form-control" id="bairro" formControlName="bairro"
                         placeholder="Digite o bairro aqui"
                         [ngClass]="{'is-invalid': f['bairro'].touched && f['bairro'].invalid}" />
                     <label for="bairro">Bairro</label>
@@ -127,7 +126,7 @@
         <div class="col-md-6 mb-3">
             <div class="input-group has-validation">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="cidade" formControlName="cidade"
+                    <input type="text" maxlength="50" class="form-control" id="cidade" formControlName="cidade"
                         placeholder="Digite a cidade aqui"
                         [ngClass]="{'is-invalid': f['cidade'].touched && f['cidade'].invalid}" />
                     <label for="cidade">Cidade</label>

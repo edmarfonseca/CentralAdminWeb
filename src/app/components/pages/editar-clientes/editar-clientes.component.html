@@ -1,1 +1,170 @@
-<p>editar-clientes works!</p>
+<app-mensagem-modal></app-mensagem-modal>
+
+<h4>Edição de Clientes</h4>
+<p>Preencha o formulário para alterar um cliente</p>
+<hr />
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row mt-4 mb-3">
+        <div class="btn-group col-md-3" role="group" aria-label="Basic radio toggle button group">
+            <input [disabled]="true" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [checked]="isPF"
+                (change)="onSelecaoPessoa(true)">
+            <label class="btn btn-outline-primary" for="btnradio1">Pessoa Física</label>
+
+            <input [disabled]="true" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [checked]="!isPF"
+                (change)="onSelecaoPessoa(false)">
+            <label class="btn btn-outline-primary" for="btnradio2">Pessoa Jurídica</label>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div *ngIf="isPF" class="col-md-3 mb-3">
+            <div class="input-group">
+                <div class="form-floating">
+                    <input [readonly]="true" type="text" mask="000.000.000-00" class="form-control" id="cpf" formControlName="cpf"  />
+                    <label for="cpf">CPF</label>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!isPF" class="col-md-3 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input [readonly]="true"  type=" text" mask="00.000.000/0000-00" class="form-control" id="cnpj" formControlName="cnpj" />
+                    <label for="cnpj">CNPJ</label>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type="text" maxlength="100" class="form-control" id="nome" formControlName="nome"
+                        placeholder="Digite o nome aqui"
+                        [ngClass]="{'is-invalid': f['nome'].touched && f['nome'].invalid}" />
+                    <label for="nome">Nome</label>
+                    <div class="invalid-feedback" *ngIf="f['nome'].touched && f['nome'].invalid">
+                        Informe o nome com até 100 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type=" text" maxlength="100" class="form-control" id="logradouro" formControlName="logradouro"
+                        placeholder="Digite o logradouro aqui"
+                        [ngClass]="{'is-invalid': f['logradouro'].touched && f['logradouro'].invalid}" />
+                    <label for="logradouro">Logradouro</label>
+                    <div class="invalid-feedback" *ngIf="f['logradouro'].touched && f['logradouro'].invalid">
+                        Informe o logradouro com até 100 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type=" text" mask="99999" class="form-control" id="numero" formControlName="numero"
+                        placeholder="Digite o número aqui"
+                        [ngClass]="{'is-invalid': f['numero'].touched && f['numero'].invalid}" />
+                    <label for="id">Número</label>
+                    <div class="invalid-feedback" *ngIf="f['numero'].touched && f['numero'].invalid">
+                        Informe o número.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type="text" maxlength="50" class="form-control" id="complemento" formControlName="complemento"
+                        placeholder="Digite o complemento aqui"
+                        [ngClass]="{'is-invalid': f['complemento'].touched && f['complemento'].invalid}" />
+                    <label for="complemento">Complemento</label>
+                    <div class="invalid-feedback" *ngIf="f['complemento'].touched && f['complemento'].invalid">
+                        Informe o complemento com até 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type=" text" maxlength="50" class="form-control" id="bairro" formControlName="bairro"
+                        placeholder="Digite o bairro aqui"
+                        [ngClass]="{'is-invalid': f['bairro'].touched && f['bairro'].invalid}" />
+                    <label for="bairro">Bairro</label>
+                    <div class="invalid-feedback" *ngIf="f['bairro'].touched && f['bairro'].invalid">
+                        Informe o bairro com até 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type="text" maxlength="50" class="form-control" id="cidade" formControlName="cidade"
+                        placeholder="Digite a cidade aqui"
+                        [ngClass]="{'is-invalid': f['cidade'].touched && f['cidade'].invalid}" />
+                    <label for="cidade">Cidade</label>
+                    <div class="invalid-feedback" *ngIf="f['cidade'].touched && f['cidade'].invalid">
+                        Informe a cidade com até 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <select formControlName="uf" class="form-select" id="uf"
+                        [ngClass]="{'is-invalid': f['uf'].touched && f['uf'].invalid}">
+                        <option *ngFor="let u of ufs" [value]="u.sigla">{{ u.descricao }}</option>
+                    </select>
+                    <label for="uf">UF</label>
+                    <div class="invalid-feedback" *ngIf="f['uf'].touched && f['uf'].invalid">
+                        Informe a cidade com até 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2 mb-3">
+            <div class="input-group has-validation">
+                <div class="form-floating">
+                    <input type=" text" mask="00000-000" class="form-control" id="cep" formControlName="cep"
+                        placeholder="Digite o cep aqui"
+                        [ngClass]="{'is-invalid': f['cep'].touched && f['cep'].invalid}">
+                    <label for="cep">Cep</label>
+                    <div class="invalid-feedback" *ngIf="f['cep'].touched && f['cep'].invalid">
+                        Informe o cep corretamente.
+                    </div>
+                </div>
+                <span class="input-group-text">
+                    <a style="cursor: pointer;" (click)="onConsultaCep(f['cep'].value)">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Salvar Alterações" [disabled]="form.invalid" />
+        </div>
+    </div>
+</form>

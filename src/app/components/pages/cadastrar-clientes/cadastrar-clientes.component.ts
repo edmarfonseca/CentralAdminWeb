@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { environment } from '../../../../environments/environment';
@@ -24,9 +24,8 @@ import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-mod
 })
 export class CadastrarClientesComponent {
 
-  mensagemSucesso: string = '';
-  mensagemAtencao: string = '';
-  mensagemErro: string = '';
+  @ViewChild(MensagemModalComponent) mensagemModal!: MensagemModalComponent;
+
   isPF: boolean = true;
   ufs: any[] = [];
 
@@ -110,10 +109,6 @@ export class CadastrarClientesComponent {
 
   onSubmit() {
 
-    this.mensagemSucesso = '';
-    this.mensagemAtencao = '';
-    this.mensagemErro = '';
-
     this.spinner.show();
 
     if (this.isPF) {
@@ -126,12 +121,12 @@ export class CadastrarClientesComponent {
     this.httpClient.post(environment.clientesApi, this.form.value)
       .subscribe({
         next: (data: any) => {
-          this.mensagemSucesso = `Cadastro realizado com sucesso!`;
+          this.mensagemModal.exibirMensagem('Cadastro realizado com sucesso!', 'success');
           this.form.reset();
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemErro = e.error.message;
+          this.mensagemModal.exibirMensagem(e.error.message, 'error');
           this.spinner.hide();
         }
       });
@@ -151,11 +146,11 @@ export class CadastrarClientesComponent {
     }
   }
 
-  onConsultaCep(eCep: string | null | undefined): void {
+  onConsultaCep(eCep: string | null): void {
 
     if (!eCep || eCep.length < 8) {
-      this.mensagemAtencao = `Informe o CEP corretamente antes de realizar a consulta.`;
-      return;
+      this.mensagemModal.exibirMensagem('Informe o CEP corretamente antes de realizar a consulta.', 'warning');
+      return;    
     }
 
     this.spinner.show();
@@ -174,10 +169,9 @@ export class CadastrarClientesComponent {
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemErro = `Consulta ao CEP falhou!`;
+          this.mensagemModal.exibirMensagem('Consulta ao CEP falhou!', 'error');
           this.spinner.hide();
         }
       });
   }
-
 }

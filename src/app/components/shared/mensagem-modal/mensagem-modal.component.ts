@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-mensagem-modal',
@@ -7,26 +7,25 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './mensagem-modal.component.html',
   styleUrls: ['./mensagem-modal.component.css']
 })
-export class MensagemModalComponent implements OnChanges {
-  @Input() success: string = '';
-  @Input() warning: string = '';
-  @Input() error: string = '';
+export class MensagemModalComponent {
 
-  // Detecta alterações nas entradas
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['success']?.currentValue) {
-      this.closeAfterTimeout(() => this.success = '');
-    }
-    if (changes['warning']?.currentValue) {
-      this.closeAfterTimeout(() => this.warning = '');
-    }
-    if (changes['error']?.currentValue) {
-      this.closeAfterTimeout(() => this.error = '');
-    }
-  }
+  success: string = '';
+  warning: string = '';
+  error: string = '';
 
-  // Configura o timeout de 5 segundos
-  private closeAfterTimeout(callback: () => void): void {
-    setTimeout(() => callback(), 5000);
+  exibirMensagem(mensagem: string, tipo: 'success' | 'warning' | 'error'): void {
+    if (tipo === 'success') {
+      this.success = mensagem;
+    } else if (tipo === 'warning') {
+      this.warning = mensagem;
+    } else if (tipo === 'error') {
+      this.error = mensagem;
+    }
+
+    setTimeout(() => {
+      if (tipo === 'success') this.success = '';
+      if (tipo === 'warning') this.warning = '';
+      if (tipo === 'error') this.error = '';
+    }, 5000);
   }
 }
