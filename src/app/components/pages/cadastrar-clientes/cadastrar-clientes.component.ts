@@ -24,7 +24,7 @@ import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-mod
 })
 export class CadastrarClientesComponent {
 
-  @ViewChild(MensagemModalComponent) mensagemModal!: MensagemModalComponent;
+  @ViewChild(MensagemModalComponent) mm!: MensagemModalComponent;
 
   isPF: boolean = true;
   ufs: any[] = [];
@@ -121,12 +121,12 @@ export class CadastrarClientesComponent {
     this.httpClient.post(environment.clientesApi, this.form.value)
       .subscribe({
         next: (data: any) => {
-          this.mensagemModal.exibirMensagem('Cadastro realizado com sucesso!', 'success');
+          this.mm.ShowSuccess('Cadastro realizado com sucesso!');
           this.form.reset();
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemModal.exibirMensagem(e.error.message, 'error');
+          this.mm.ShowError(e.error.message);
           this.spinner.hide();
         }
       });
@@ -149,7 +149,7 @@ export class CadastrarClientesComponent {
   onConsultaCep(eCep: string | null): void {
 
     if (!eCep || eCep.length < 8) {
-      this.mensagemModal.exibirMensagem('Informe o CEP corretamente antes de realizar a consulta.', 'warning');
+      this.mm.ShowWarning('Informe o CEP corretamente antes de realizar a consulta.');
       return;    
     }
 
@@ -169,7 +169,7 @@ export class CadastrarClientesComponent {
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemModal.exibirMensagem('Consulta ao CEP falhou!', 'error');
+          this.mm.ShowError('Consulta ao CEP falhou!');
           this.spinner.hide();
         }
       });

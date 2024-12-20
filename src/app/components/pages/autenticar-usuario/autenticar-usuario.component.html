@@ -1,38 +1,40 @@
+<app-mensagem-modal></app-mensagem-modal>
+
 <div class="bg-light d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
-
-        <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Erro:</strong> {{ mensagemErro }}
-            <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
-        </div>
-
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
             <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <div class="input-group">
+                <div class="input-group has-validation">
                     <span class="input-group-text">
                         <i class="bi bi-envelope"></i>
                     </span>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail"
-                        formControlName="email">
-                </div>
-                <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
-                    Informe um e-mail válido.
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" formControlName="email"
+                            placeholder="Digite o e-mail aqui"
+                            [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}" />
+                        <label for="email">E-mail</label>
+                        <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].invalid">
+                            Informe um e-mail válido.
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Senha</label>
-                <div class="input-group">
+                <div class="input-group has-validation">
                     <span class="input-group-text">
                         <i class="bi bi-lock"></i>
                     </span>
-                    <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua senha"
-                        formControlName="senha">
-                </div>
-                <div class="text-danger" *ngIf="f['senha'].touched && f['senha'].invalid">
-                    Informe uma senha com, pelo menos, 8 caracteres.
+                    <div class="form-floating">
+                        <input type="password" maxlength="8" class="form-control" id="senha" formControlName="senha"
+                            placeholder="Digite senha aqui"
+                            [ngClass]="{'is-invalid': f['senha'].touched && f['senha'].invalid}" />
+                        <label for="password">Senha</label>
+                        <div class="invalid-feedback" *ngIf="f['senha'].touched && f['senha'].invalid">
+                            Informe a senha com até 8 caracteres.
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -41,6 +43,5 @@
             </div>
 
         </form>
-
     </div>
 </div>

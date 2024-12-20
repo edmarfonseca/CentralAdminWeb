@@ -1,23 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-modal.component';
 
 @Component({
   selector: 'app-autenticar-usuario',
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MensagemModalComponent
   ],
   templateUrl: './autenticar-usuario.component.html',
   styleUrl: './autenticar-usuario.component.css'
 })
 export class AutenticarUsuarioComponent {
 
-  mensagemErro: string = '';
+  @ViewChild(MensagemModalComponent) mm!: MensagemModalComponent;
 
   constructor(
     private httpClient: HttpClient,
@@ -40,15 +42,15 @@ export class AutenticarUsuarioComponent {
     this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value)
       .subscribe({
         next: (data: any) => {
-          sessionStorage.setItem('user-auth', JSON.stringify(data));
+          const usuario = ''; //CryptoJS.AES.encrypt(JSON.stringify(data), environment.cryptoKey);
+          sessionStorage.setItem('user-auth', usuario.toString());
           location.href = '/pages/menu';
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemErro = e.error.message;
+          this.mm.ShowError(e.error.message);
           this.spinner.hide();
         }
       })
   }
-
 }

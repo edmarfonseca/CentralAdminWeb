@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditarClientesComponent {
 
-  @ViewChild(MensagemModalComponent) mensagemModal!: MensagemModalComponent;
+  @ViewChild(MensagemModalComponent) mm!: MensagemModalComponent;
 
   isPF: boolean = true;
   ufs: any[] = [];
@@ -132,10 +132,10 @@ export class EditarClientesComponent {
       .subscribe({
         next: (data: any) => {
           this.spinner.hide();
-          this.mensagemModal.exibirMensagem('Atualização realizada com sucesso!', 'success');
+          this.mm.ShowSuccess('Atualização realizada com sucesso!');
         },
         error: (e) => {
-          this.mensagemModal.exibirMensagem(e.error.message, 'error');
+          this.mm.ShowError(e.error.message);
           this.spinner.hide();
         }
       });
@@ -158,7 +158,7 @@ export class EditarClientesComponent {
   onConsultaCep(eCep: string | null): void {
 
     if (!eCep || eCep.length < 8) {
-      this.mensagemModal.exibirMensagem('Informe o CEP corretamente antes de realizar a consulta.', 'warning');
+      this.mm.ShowWarning('Informe o CEP corretamente antes de realizar a consulta.');
       return;    
     }
 
@@ -178,7 +178,7 @@ export class EditarClientesComponent {
           this.spinner.hide();
         },
         error: (e) => {
-          this.mensagemModal.exibirMensagem('Consulta ao CEP falhou!', 'error');
+          this.mm.ShowError('Consulta ao CEP falhou!');
           this.spinner.hide();
         }
       });

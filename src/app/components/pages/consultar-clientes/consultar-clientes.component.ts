@@ -22,7 +22,7 @@ import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-mod
 })
 export class ConsultarClientesComponent {
 
-  @ViewChild(MensagemModalComponent) mensagemModal!: MensagemModalComponent;
+  @ViewChild(MensagemModalComponent) mm!: MensagemModalComponent;
 
   clientes: any[] = [];
   pagina: number = 1;
@@ -69,12 +69,12 @@ export class ConsultarClientesComponent {
     this.httpClient.delete(`${environment.clientesApi}/${this.selectedId}`)
       .subscribe({
         next: (data: any) => {
-          this.mensagemModal.exibirMensagem('Exclusão realizada com sucesso!', 'success');
+          this.mm.ShowSuccess('Exclusão realizada com sucesso!');
           this.spinner.hide();
           this.ngOnInit();
         },
         error: (e) => {
-          this.mensagemModal.exibirMensagem(e.error.message, 'error');
+          this.mm.ShowError(e.error.message);
           this.spinner.hide();
         }
       })

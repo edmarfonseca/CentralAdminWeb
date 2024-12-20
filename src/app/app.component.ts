@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 //import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -14,5 +14,4 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Central Admin';
 }

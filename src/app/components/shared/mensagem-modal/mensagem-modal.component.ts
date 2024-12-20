@@ -3,29 +3,32 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-mensagem-modal',
-  imports: [CommonModule],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './mensagem-modal.component.html',
   styleUrls: ['./mensagem-modal.component.css']
 })
 export class MensagemModalComponent {
 
+  timeShow: number = 5000;
+
   success: string = '';
   warning: string = '';
   error: string = '';
 
-  exibirMensagem(mensagem: string, tipo: 'success' | 'warning' | 'error'): void {
-    if (tipo === 'success') {
-      this.success = mensagem;
-    } else if (tipo === 'warning') {
-      this.warning = mensagem;
-    } else if (tipo === 'error') {
-      this.error = mensagem;
-    }
+  ShowSuccess(message: string): void {
+    this.success = message;
+    setTimeout(() => this.success = '', this.timeShow);
+  }
 
-    setTimeout(() => {
-      if (tipo === 'success') this.success = '';
-      if (tipo === 'warning') this.warning = '';
-      if (tipo === 'error') this.error = '';
-    }, 5000);
+  ShowWarning(message: string): void {
+    this.warning = message;
+    setTimeout(() => this.warning = '', this.timeShow);
+  }
+
+  ShowError(message: string): void {
+    this.error = message;
+    setTimeout(() => this.error = '', this.timeShow);
   }
 }

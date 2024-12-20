@@ -1,24 +1,9 @@
-<style>
-    .hover-effect {
-        background-color: white;
-        /* Cor padrão (branco) */
-        transition: background-color 0.3s ease;
-        /* Animação suave */
-    }
-
-    /* Aplica o estilo no hover */
-    .hover-effect:hover {
-        background-color: #f8f9fa !important;
-        /* Força o estilo no hover */
-    }
-</style>
-
 <div class="container my-5">
 
     <div class="row g-3">
 
         <div class="col-md-4">
-            <a href="/pages/consultar-sistemas" class="text-decoration-none">
+            <a routerLink="/pages/consultar-sistemas" class="text-decoration-none">
                 <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
                     <i class="bi bi-grid fs-2 text-primary me-3"></i>
                     <div>
@@ -30,7 +15,7 @@
         </div>
 
         <div class="col-md-4">
-            <a href="/pages/consultar-clientes" class="text-decoration-none">
+            <a routerLink="/pages/consultar-clientes" class="text-decoration-none">
                 <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
                     <i class="bi bi-people fs-2 text-primary me-3"></i>
                     <div>
