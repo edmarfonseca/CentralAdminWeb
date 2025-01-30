@@ -1,25 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-modal.component';
 
 @Component({
   selector: 'app-editar-sistemas',
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MensagemModalComponent
   ],
   templateUrl: './editar-sistemas.component.html',
   styleUrl: './editar-sistemas.component.css'
 })
 export class EditarSistemasComponent {
 
-  mensagemSucesso: string = '';
-  mensagemErro: string = '';
+  @ViewChild(MensagemModalComponent) mm!: MensagemModalComponent;
+
   id: string = '';
 
   constructor(
@@ -56,17 +58,13 @@ export class EditarSistemasComponent {
     this.httpClient.get(`${environment.sistemasApi}/${this.id}`)
       .subscribe({
         next: (data) => {
-          this.form.patchValue(data); //preenchendo o formulário
+          this.form.patchValue(data);
           this.spinner.hide();
         }
       })
-
   }
 
   onSubmit() {
-
-    this.mensagemSucesso = '';
-    this.mensagemErro = '';
 
     this.spinner.show();
 
@@ -74,10 +72,10 @@ export class EditarSistemasComponent {
       .subscribe({
         next: (data: any) => {
           this.spinner.hide();
-          this.mensagemSucesso = `Atualização realizada com sucesso!`;
+          this.mm.ShowSuccess('Atualização realizada com sucesso!');
         },
         error: (e) => {
-          this.mensagemErro = e.error.message;
+          this.mm.ShowError(e.error.message);
           this.spinner.hide();
         }
       });

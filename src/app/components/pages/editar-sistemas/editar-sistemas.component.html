@@ -1,16 +1,8 @@
+<app-mensagem-modal></app-mensagem-modal>
+
 <h4>Edição de Sistemas</h4>
-<p>Preencha o formulário abaixo para alterar o sistema.</p>
+<p>Preencha o formulário para alterar o sistema.</p>
 <hr />
-
-<div *ngIf="mensagemSucesso" class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Sucesso!</strong> {{ mensagemSucesso }}
-    <button (click)="mensagemSucesso = ''" type="button" class="btn-close" aria-label="Close"></button>
-</div>
-
-<div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Erro: </strong> {{ mensagemErro }}
-    <button (click)="mensagemErro = ''" type="button" class="btn-close" aria-label="Close"></button>
-</div>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
