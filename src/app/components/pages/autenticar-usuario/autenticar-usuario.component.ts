@@ -42,7 +42,7 @@ export class AutenticarUsuarioComponent {
     this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value)
       .subscribe({
         next: (data: any) => {
-          const usuario = ''; //CryptoJS.AES.encrypt(JSON.stringify(data), environment.cryptoKey);
+          const usuario = JSON.stringify(data); //CryptoJS.AES.encrypt(JSON.stringify(data), environment.cryptoKey);
           sessionStorage.setItem('user-auth', usuario.toString());
           location.href = '/pages/menu';
           this.spinner.hide();
