@@ -1,28 +1,14 @@
-<nav *ngIf="isAuthenticated" class="navbar navbar-expand-lg bg-bodytertiary">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Manter Clientes
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/pages/cadastrar-
- clientes">Cadastrar Clientes</a></li>
-                        <li><a class="dropdown-item" routerLink="/pages/consultar-
- clientes">Consultar Clientes</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <span class="navbar-text me-3">
-                    <strong>{{ nomeUsuario }}</strong>
-                </span>
-                <button class="btn btn-outline-secondary btn-sm me-3" (click)="logout()">
-                    Sair do sistema
-                </button>
-            </div>
-        </div>
+<nav *ngIf="isAuthenticated" class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <div class="container-fluid">
+    <p></p>
+    <div class="d-flex align-items-center ms-auto">
+      <div class="d-flex flex-column align-items-center text-white">
+        <span class="nome-usuario">{{ nomeUsuario }}</span>
+        <a href="#" class="sair-link" (click)="logout()">Sair</a>
+      </div>
+      <div class="avatar-circle">
+        {{ iniciais }}
+      </div>
     </div>
+  </div>
 </nav>

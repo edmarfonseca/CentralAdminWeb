@@ -1,0 +1,47 @@
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-left: 15px; /* Espaçamento entre o círculo e o nome/sair */
+}
+
+.sair-link {
+  font-size: 14px;
+  color: #f8f9fa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sair-link:hover {
+  text-decoration: underline;
+}
+
+/* Alinhamento do nome e do link Sair */
+.d-flex.flex-column {
+  display: flex;
+  align-items: center; /* Alinha o nome e "Sair" verticalmente */
+  justify-content: center;
+}
+
+.nome-usuario {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Utiliza flexbox para garantir que o conteúdo esteja alinhado corretamente */
+.d-flex.align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.ms-auto {
+  margin-left: auto; /* Alinha o conteúdo à direita */
+}
