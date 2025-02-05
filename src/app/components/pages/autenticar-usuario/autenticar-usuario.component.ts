@@ -43,6 +43,9 @@ export class AutenticarUsuarioComponent {
 
     try {
       const data: any = await lastValueFrom(this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value));
+      
+      sessionStorage.setItem('debug', JSON.stringify(data));
+      
       const usuario = await this.crypto.encrypt(JSON.stringify(data));
 
       sessionStorage.setItem('user-auth', JSON.stringify(usuario));
