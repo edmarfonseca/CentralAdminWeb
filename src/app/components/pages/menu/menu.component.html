@@ -1,10 +1,12 @@
+<app-mensagem-modal></app-mensagem-modal>
+
 <div class="container my-5">
 
     <div class="row g-3">
 
         <div class="col-md-4">
-            <a routerLink="/pages/consultar-sistemas" class="text-decoration-none">
-                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
+            <a (click)="navMenu('sistemasApi', 'consultar-sistemas')" class="text-decoration-none">
+                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect seta-menu">
                     <i class="bi bi-grid fs-2 text-primary me-3"></i>
                     <div>
                         <h6 class="mb-1 text-dark">Sistemas</h6>
@@ -15,8 +17,8 @@
         </div>
 
         <div class="col-md-4">
-            <a routerLink="/pages/consultar-clientes" class="text-decoration-none">
-                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect">
+            <a (click)="navMenu('clientesApi', 'consultar-clientes')" class="text-decoration-none">
+                <div class="d-flex align-items-center border rounded p-2 account-card hover-effect seta-menu">
                     <i class="bi bi-people fs-2 text-primary me-3"></i>
                     <div>
                         <h6 class="mb-1 text-dark">Clientes</h6>

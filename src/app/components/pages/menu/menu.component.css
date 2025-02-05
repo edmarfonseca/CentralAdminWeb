@@ -10,3 +10,7 @@
     background-color: #f8f9fa !important;
     /* Força o estilo no hover */
 }
+
+.seta-menu {
+    cursor: pointer;
+}

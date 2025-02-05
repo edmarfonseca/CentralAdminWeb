@@ -5,6 +5,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { environment } from '../../../../environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MensagemModalComponent } from '../../shared/mensagem-modal/mensagem-modal.component';
+import { CryptoService } from '../../../services/crypto.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-autenticar-usuario',
@@ -23,7 +25,8 @@ export class AutenticarUsuarioComponent {
 
   constructor(
     private httpClient: HttpClient,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private crypto: CryptoService
   ) { }
 
   form = new FormGroup({
@@ -35,22 +38,20 @@ export class AutenticarUsuarioComponent {
     return this.form.controls;
   }
 
-  onSubmit() {
-
+  async onSubmit() {
     this.spinner.show();
 
-    this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value)
-      .subscribe({
-        next: (data: any) => {
-          const usuario = JSON.stringify(data); //CryptoJS.AES.encrypt(JSON.stringify(data), environment.cryptoKey);
-          sessionStorage.setItem('user-auth', usuario.toString());
-          location.href = '/pages/menu';
-          this.spinner.hide();
-        },
-        error: (e) => {
-          this.mm.ShowError(e.error.message);
-          this.spinner.hide();
-        }
-      })
+    try {
+      const data: any = await lastValueFrom(this.httpClient.post(`${environment.usuariosApi}/autenticar`, this.form.value));
+      const usuario = await this.crypto.encrypt(JSON.stringify(data));
+
+      sessionStorage.setItem('user-auth', JSON.stringify(usuario));
+
+      location.href = '/pages/menu';
+    } catch (e: any) {
+      this.mm.ShowError(e.error.message);
+    } finally {
+      this.spinner.hide();
+    }
   }
 }
